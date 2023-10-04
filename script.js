@@ -31,11 +31,13 @@ function fetchNumbers() {
         }
 
         // Chain the promises
-        fetchNumbers()
+       document.addEventListener("DOMContentLoaded", function () {
+		   fetchNumbers()
             .then(filterOddNumbers)
             .then(multiplyByTwo)
             .then(updateOutput)
             .catch((error) => {
                 console.error(error);
             });
+	   })
     
