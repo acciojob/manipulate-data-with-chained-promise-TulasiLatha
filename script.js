@@ -27,7 +27,7 @@ function fetchNumbers() {
         // Function to update the HTML element with the final result
         function updateOutput(result) {
             const outputElement = document.getElementById("output");
-            outputElement.textContent = JSON.stringify(result);
+            outputElement.textContent = result.join(', ');
         }
 
         // Chain the promises
