@@ -1,43 +1,34 @@
-//your JS code here. If required.
-function fetchNumbers() {
-            return new Promise((resolve) => {
-                setTimeout(() => {
-                    const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-                    resolve(numbers);
-                }, 3000);
-            });
-        }
+const output = document.getElementById("output");
 
-        // Function to filter out odd numbers
-        function filterOddNumbers(numbers) {
-            return new Promise((resolve) => {
-                const evenNumbers = numbers.filter((num) => num % 2 === 0);
-                resolve(evenNumbers);
-            });
-        }
+function processNumbers(numbers) {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(numbers);
+    }, 3000);
+  });
+}
 
-        // Function to multiply even numbers by 2
-        function multiplyByTwo(numbers) {
-            return new Promise((resolve) => {
-                const doubledNumbers = numbers.map((num) => num * 2);
-                resolve(doubledNumbers);
-            });
-        }
+const input = [1, 2, 3, 4];
 
-        // Function to update the HTML element with the final result
-        function updateOutput(result) {
-            const outputElement = document.getElementById("output");
-            outputElement.textContent = result.join(', ');
-        }
-
-        // Chain the promises
-       document.addEventListener("DOMContentLoaded", function () {
-		   fetchNumbers()
-            .then(filterOddNumbers)
-            .then(multiplyByTwo)
-            .then(updateOutput)
-            .catch((error) => {
-                console.error(error);
-            });
-	   })
-    
+processNumbers(input)
+  .then((numbers) => {
+    const filteredNumbers = numbers.filter((number) => number % 2 === 0);
+    output.textContent = `${filteredNumbers}`;
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(filteredNumbers);
+      }, 1000);
+    });
+  })
+  .then((filteredNumbers) => {
+    const multipliedNumbers = filteredNumbers.map(
+      (number) => (number *= 2)
+    );
+    output.textContent = `${multipliedNumbers}`;
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(multipliedNumbers);
+      }, 2000);
+    });
+  })
+  .catch((error) => console.error(error));
